@@ -1,4 +1,5 @@
 plugins {
+    id("java")
     id("application")
     id("checkstyle")
     id("org.sonarqube") version "6.1.0.5360"
@@ -15,6 +16,9 @@ sonar {
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
+application {
+    mainClass.set("hexlet.code.App")
+}
 repositories {
     mavenCentral()
     gradlePluginPortal()
