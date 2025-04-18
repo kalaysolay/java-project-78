@@ -2,12 +2,12 @@ plugins {
     id("java")
     id("application")
     id("checkstyle")
-    id("org.sonarqube") version "6.1.0.5360"
+    id("org.sonarqube") version "6.0.1.5171"
 }
 
 sonar {
     properties {
-        property("sonar.projectKey", "kalaysolay_java-project-71")
+        property("sonar.projectKey", "kalaysolay_java-project-78")
         property("sonar.organization", "kalaysolay")
         property("sonar.host.url", "https://sonarcloud.io")
     }
