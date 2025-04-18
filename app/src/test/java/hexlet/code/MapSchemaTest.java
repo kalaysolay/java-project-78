@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
+import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -36,4 +38,59 @@ public class MapSchemaTest {
         map.put("key3", "value3");
         assertFalse(schema.isValid(map));
     }
+
+    @Test
+    void testShapeValidCase() {
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        Map<String, BaseSchema<String>> rules = new HashMap<>();
+        rules.put("firstName", v.string().required());
+        rules.put("lastName", v.string().required().minLength(2));
+
+        schema.shape(rules);
+
+        Map<String, String> person = new HashMap<>();
+        person.put("firstName", "Alice");
+        person.put("lastName", "Smith");
+
+        assertTrue(schema.isValid(person));
+    }
+
+    @Test
+    void testShapeNullField() {
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        Map<String, BaseSchema<String>> rules = new HashMap<>();
+        rules.put("firstName", v.string().required());
+        rules.put("lastName", v.string().required().minLength(2));
+
+        schema.shape(rules);
+
+        Map<String, String> person = new HashMap<>();
+        person.put("firstName", "John");
+        person.put("lastName", null); // <- невалидно
+
+        assertFalse(schema.isValid(person));
+    }
+
+    @Test
+    void testShapeTooShort() {
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        Map<String, BaseSchema<String>> rules = new HashMap<>();
+        rules.put("firstName", v.string().required());
+        rules.put("lastName", v.string().required().minLength(2));
+
+        schema.shape(rules);
+
+        Map<String, String> person = new HashMap<>();
+        person.put("firstName", "Anna");
+        person.put("lastName", "B"); // <- меньше двух символов
+
+        assertFalse(schema.isValid(person));
+    }
+
 }

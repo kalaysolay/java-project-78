@@ -1,6 +1,9 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -92,5 +95,45 @@ public class App {
         System.out.println(schemaMap.isValid(data));  // false
         data.put("key2", "value2");
         System.out.println(schemaMap.isValid(data)); // true
+
+        System.out.println("---------------------------");
+
+        System.out.println("----------SHAPE -------------");
+
+        var v4 = new Validator();
+
+        var schemaShape = v.map();
+
+// shape позволяет описывать валидацию для значений каждого ключа объекта Map
+// Создаем набор схем для проверки каждого ключа проверяемого объекта
+// Для значения каждого ключа - своя схема
+        Map<String, BaseSchema<String>> schemasMap = new HashMap<>();
+
+// Определяем схемы валидации для значений свойств "firstName" и "lastName"
+// Имя должно быть строкой, обязательно для заполнения
+        schemasMap.put("firstName", v.string().required());
+// Фамилия обязательна для заполнения и должна содержать не менее 2 символов
+        schemasMap.put("lastName", v.string().required().minLength(2));
+
+// Настраиваем схему `MapSchema`
+// Передаем созданный набор схем в метод shape()
+        schemaShape.shape(schemasMap);
+
+// Проверяем объекты
+        Map<String, String> human1 = new HashMap<>();
+        human1.put("firstName", "John");
+        human1.put("lastName", "Smith");
+        schemaShape.isValid(human1); // true
+
+        Map<String, String> human2 = new HashMap<>();
+        human2.put("firstName", "John");
+        human2.put("lastName", null);
+        schemaShape.isValid(human2); // false
+
+        Map<String, String> human3 = new HashMap<>();
+        human3.put("firstName", "Anna");
+        human3.put("lastName", "B");
+        schemaShape.isValid(human3); // false
+
     }
 }
