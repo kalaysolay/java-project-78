@@ -6,6 +6,11 @@ import java.util.Objects;
 public class MapSchema extends BaseSchema<Map<?, ?>>  {
     private Map<String, BaseSchema<String>> shapeSchemas;
 
+    /**
+     * добавляет обаязательность заполнения для схемы.
+     *
+     * @return текущий объект
+     */
     @Override
     public MapSchema required() {
         super.required();
@@ -13,11 +18,22 @@ public class MapSchema extends BaseSchema<Map<?, ?>>  {
         return this;
     }
 
+    /**
+     * возвращает размер.
+     *
+     * @param size
+     * @return текущий объект
+     */
     public MapSchema sizeof(int size) {
         addCheck("sizeof", map -> map != null && map.size() == size);
         return this;
     }
 
+    /**
+     * метод для вложенных условий.
+     *
+     * @param schemas - схема валидации
+     */
     public void shape(Map<String, BaseSchema<String>> schemas) {
         this.shapeSchemas = schemas;
 
