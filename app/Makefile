@@ -6,7 +6,10 @@ run:
 
 build: test checkstyle
 	./gradlew clean
-	./gradlew installDist
+	./gradlew checkstyleMain
+	./gradlew checkstyleTest
+	./gradlew test
+	./gradlew build
 
 test: # Run tests
 	./gradlew test

@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatorTest {
     @Test
@@ -141,6 +140,7 @@ public class ValidatorTest {
     @Test
     void testMinLength() {
         var schema = new Validator().string().required().minLength(4);
+        System.out.println("CHECKS: " + schema.getChecks().keySet());
 
         assertFalse(schema.isValid("cat"));
         assertTrue(schema.isValid("lion"));
@@ -150,6 +150,7 @@ public class ValidatorTest {
     @Test
     void testContains() {
         var schema = new Validator().string().required().contains("hex");
+        System.out.println("CHECKS: " + schema.getChecks().keySet());
 
         assertTrue(schema.isValid("hexlet"));
         assertFalse(schema.isValid("hello"));
@@ -162,5 +163,82 @@ public class ValidatorTest {
         assertTrue(schema.isValid("what does the fox say"));
         assertFalse(schema.isValid("fox"));
         assertFalse(schema.isValid("something else"));
+    }
+
+    @Test
+    public void testIsValidNull() {
+        String testString = null;
+        var v = new Validator();
+        var schema = v.string();
+        assertTrue(schema.isValid(testString));
+
+    }
+
+    @Test
+    public void testIsValidEmpty() {
+        String testString = "";
+        var v = new Validator();
+        var schema = v.string();
+        assertEquals(schema.isValid(testString), true);
+    }
+
+    @Test
+    public void testIsValidRequiredNull() {
+        String testString = null;
+        var v = new Validator();
+        var schema = v.string().required();
+        assertEquals(schema.isValid(testString), false);
+
+    }
+
+    @Test
+    public void testIsValidRequiredEmpty() {
+        String testString = "";
+        var v = new Validator();
+        var schema = v.string().required();
+        assertEquals(schema.isValid(testString), false);
+    }
+
+    @Test
+    public void testIsValid() {
+        String testString = "grin without a cat";
+        var v = new Validator();
+        var schema = v.string();
+        assertEquals(schema.isValid(testString), true);
+
+    }
+
+    @Test
+    public void testIsValidContainsEmpty() {
+        String testString = "grin without a cat";
+        var v = new Validator();
+        var schema = v.string().contains("");
+        assertEquals(schema.isValid(testString), true);
+    }
+
+    @Test
+    public void testIsValidContains() {
+        String testString = "grin without a cat";
+        var v = new Validator();
+        var schema = v.string().contains("grin");
+        assertEquals(schema.isValid(testString), true);
+    }
+
+    @Test
+    public void testIsValidContainsMinLengthTrue() {
+        String testString = "grin without a cat";
+        var v = new Validator();
+        var schema = v.string().minLength(5);
+        assertEquals(schema.isValid(testString), true);
+    }
+
+    @Test
+    public void testIsValidContainsMinlengthFalse() {
+        String testString = "grin without a cat";
+        var v = new Validator();
+
+        var schema = v.string().minLength(200);
+        System.out.println("COUNT OF CHECKS " + schema.getChecks().size());
+        assertEquals(schema.isValid(testString), false);
     }
 }
