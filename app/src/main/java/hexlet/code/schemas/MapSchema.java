@@ -22,7 +22,9 @@ public class MapSchema extends BaseSchema<Map<?, ?>>  {
         this.shapeSchemas = schemas;
 
         addCheck("shape", map -> {
-            if (map == null) return true;
+            if (map == null) {
+                return true;
+            }
 
             for (Map.Entry<String, BaseSchema<String>> entry : shapeSchemas.entrySet()) {
                 String key = entry.getKey();
