@@ -2,18 +2,6 @@ package hexlet.code.schemas;
 
 
 public class StringSchema extends BaseSchema<String>  {
-    // храню проверки в этом списке
-    //убираем в базовый класс
-    // private final List<Predicate<String>> checks = new ArrayList<>();
-   // private boolean isRequired = false;
-
-    /*
-    переделал под предикат
-    private int minLength;
-    private String containsValue;
-*/
-    private Integer minLength = null;
-
     /**
      * добавляет обаязательность заполнения для схемы.
      *

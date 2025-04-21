@@ -10,8 +10,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class ValidatorTest {
     @Test
@@ -167,10 +165,9 @@ public class ValidatorTest {
 
     @Test
     public void testIsValidNull() {
-        String testString = null;
         var v = new Validator();
         var schema = v.string();
-        assertTrue(schema.isValid(testString));
+        assertTrue(schema.isValid(null));
 
     }
 
@@ -179,15 +176,14 @@ public class ValidatorTest {
         String testString = "";
         var v = new Validator();
         var schema = v.string();
-        assertEquals(schema.isValid(testString), true);
+        assertTrue(schema.isValid(testString));
     }
 
     @Test
     public void testIsValidRequiredNull() {
-        String testString = null;
         var v = new Validator();
         var schema = v.string().required();
-        assertEquals(schema.isValid(testString), false);
+        assertFalse(schema.isValid(null));
 
     }
 
@@ -196,7 +192,7 @@ public class ValidatorTest {
         String testString = "";
         var v = new Validator();
         var schema = v.string().required();
-        assertEquals(schema.isValid(testString), false);
+        assertFalse(schema.isValid(testString));
     }
 
     @Test
@@ -204,7 +200,7 @@ public class ValidatorTest {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string();
-        assertEquals(schema.isValid(testString), true);
+        assertTrue(schema.isValid(testString));
 
     }
 
@@ -213,7 +209,7 @@ public class ValidatorTest {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().contains("");
-        assertEquals(schema.isValid(testString), true);
+        assertTrue(schema.isValid(testString));
     }
 
     @Test
@@ -221,7 +217,7 @@ public class ValidatorTest {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().contains("grin");
-        assertEquals(schema.isValid(testString), true);
+        assertTrue(schema.isValid(testString));
     }
 
     @Test
@@ -229,15 +225,14 @@ public class ValidatorTest {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().minLength(5);
-        assertEquals(schema.isValid(testString), true);
+        assertTrue(schema.isValid(testString));
     }
 
     @Test
     public void testIsValidContainsMinlengthFalse() {
         String testString = "grin without a cat";
         var v = new Validator();
-
         var schema = v.string().minLength(200);
-        assertEquals(schema.isValid(testString), false);
+        assertFalse(schema.isValid(testString));
     }
 }

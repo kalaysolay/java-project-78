@@ -4,6 +4,9 @@
 
 
 ### Sonar
+#### Coverage
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kalaysolay_java-project-78&metric=coverage)](https://sonarcloud.io/summary/new_code?id=kalaysolay_java-project-78)
+
 #### Quality Gate Status
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kalaysolay_java-project-78&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kalaysolay_java-project-78)
 
