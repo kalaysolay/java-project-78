@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ValidatorTest {
     @Test
     void mapSchemaTest() {
-        System.out.println("Starting TEST MAP");
         var v = new Validator();
         var schema = v.map();
 
@@ -119,6 +118,7 @@ public class ValidatorTest {
         assertTrue(schema.isValid(10));
         assertFalse(schema.isValid(4));
         assertFalse(schema.isValid(11));
+        assertTrue(schema.isValid(6));
     }
 
 
@@ -144,8 +144,6 @@ public class ValidatorTest {
     @Test
     void testMinLength() {
         var schema = new Validator().string().required().minLength(4);
-        System.out.println("CHECKS: " + schema.getChecks().keySet());
-
         assertFalse(schema.isValid("cat"));
         assertTrue(schema.isValid("lion"));
         assertTrue(schema.isValid("tiger"));
@@ -154,8 +152,6 @@ public class ValidatorTest {
     @Test
     void testContains() {
         var schema = new Validator().string().required().contains("hex");
-        System.out.println("CHECKS: " + schema.getChecks().keySet());
-
         assertTrue(schema.isValid("hexlet"));
         assertFalse(schema.isValid("hello"));
     }
@@ -242,7 +238,6 @@ public class ValidatorTest {
         var v = new Validator();
 
         var schema = v.string().minLength(200);
-        System.out.println("COUNT OF CHECKS " + schema.getChecks().size());
         assertEquals(schema.isValid(testString), false);
     }
 }
