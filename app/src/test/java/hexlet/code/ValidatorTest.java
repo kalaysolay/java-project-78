@@ -164,7 +164,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidNull() {
+    void testIsValidNull() {
         var v = new Validator();
         var schema = v.string();
         assertTrue(schema.isValid(null));
@@ -172,7 +172,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidEmpty() {
+    void testIsValidEmpty() {
         String testString = "";
         var v = new Validator();
         var schema = v.string();
@@ -180,7 +180,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidRequiredNull() {
+    void testIsValidRequiredNull() {
         var v = new Validator();
         var schema = v.string().required();
         assertFalse(schema.isValid(null));
@@ -188,7 +188,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidRequiredEmpty() {
+     void testIsValidRequiredEmpty() {
         String testString = "";
         var v = new Validator();
         var schema = v.string().required();
@@ -196,7 +196,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValid() {
+    void testIsValid() {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string();
@@ -205,7 +205,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidContainsEmpty() {
+    void testIsValidContainsEmpty() {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().contains("");
@@ -213,7 +213,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidContains() {
+    void testIsValidContains() {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().contains("grin");
@@ -221,7 +221,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidContainsMinLengthTrue() {
+    void testIsValidContainsMinLengthTrue() {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().minLength(5);
@@ -229,7 +229,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testIsValidContainsMinlengthFalse() {
+    void testIsValidContainsMinlengthFalse() {
         String testString = "grin without a cat";
         var v = new Validator();
         var schema = v.string().minLength(200);
