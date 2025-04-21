@@ -8,7 +8,9 @@ public class Validator {
     public static StringSchema string() {
         return new StringSchema();
     }
-
+    Validator() {
+        // Приватный конструктор запрещает new Validator()
+    }
     public static NumberSchema number() {
         return new NumberSchema();
     }
