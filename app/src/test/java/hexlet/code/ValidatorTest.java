@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
-public class ValidatorTest {
+class ValidatorTest {
     @Test
     void mapSchemaTest() {
         var v = new Validator();
