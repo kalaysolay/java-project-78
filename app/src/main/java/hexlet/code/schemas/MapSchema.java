@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MapSchema extends BaseSchema<Map<?, ?>>  {
+    @SuppressWarnings("S1450")
     private Map<String, BaseSchema<String>> shapeSchemas;
 
     /**

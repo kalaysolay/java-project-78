@@ -4,6 +4,7 @@ import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 
+@SuppressWarnings("java:S1118")
 public class Validator {
     public static StringSchema string() {
         return new StringSchema();
