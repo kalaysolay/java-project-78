@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("checkstyle")
+    id("jacoco")
     id("org.sonarqube") version "6.0.1.5171"
 }
 
@@ -28,4 +29,14 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)    // ☑️ ОБЯЗАТЕЛЬНО для SonarQube
+        html.required.set(true)   // по желанию
+    }
 }
