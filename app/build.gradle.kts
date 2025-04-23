@@ -10,6 +10,8 @@ sonar {
         property("sonar.projectKey", "kalaysolay_java-project-78")
         property("sonar.organization", "kalaysolay")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+
     }
 }
 
